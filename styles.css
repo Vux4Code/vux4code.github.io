@@ -1,0 +1,20 @@
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.infoLink:hover{
+    text-decoration: underline;
+    color: black;
+}
+
+.infoTable {
+    width: 400px;
+}
+.current {
+    color: red;
+    text-decoration: underline white;
+}
+.active{
+    background-color: #333;
+}     

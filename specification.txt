@@ -1,0 +1,21 @@
+10 HTML tags :
+div
+span
+h2
+h3
+h4
+p
+table
+th
+tr
+td
+5 CSS selectors :
+a
+.infoLink:hover
+.infoTable
+.current
+.active
+JS description :
+I using alert command to print the random fact about me when click the button.
+Bootstrap description :
+I using some nav-bar class to beautify the navigation bar, and some other basic classes.
