@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Giáng Sinh!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Cấu trúc chung --- */
+        body {
+            margin: 0;
+            padding: 0;
+            background: #1a1a2e; /* Màu trời đêm */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        /* --- Hiệu ứng tuyết rơi --- */
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: #fff;
+            user-select: none;
+            z-index: 1;
+            pointer-events: none;
+            animation-name: fall;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(105vh); }
+        }
+
+        /* --- Khung chứa thiệp --- */
+        .card-container {
+            perspective: 1500px;
+            z-index: 10;
+        }
+
+        .card {
+            width: 300px;
+            height: 400px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1s ease-in-out;
+            cursor: pointer;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        /* Lớp kích hoạt khi mở thiệp */
+        .card.open {
+            transform: rotateY(-180deg);
+        }
+
+        /* --- Các mặt của thiệp --- */
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden; /* Ẩn mặt sau khi xoay */
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* --- Mặt trước (Bìa) --- */
+        .front {
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            color: white;
+            border: 5px solid #f1c40f;
+            z-index: 2;
+        }
+
+        .front h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .front .click-hint {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            animation: pulse 1.5s infinite;
+        }
+
+        .tree-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+
+        /* --- Mặt sau (Nội dung bên trong) --- */
+        .back {
+            background: #fff;
+            color: #333;
+            transform: rotateY(180deg); /* Xoay sẵn để khớp khi lật */
+            padding: 20px;
+            box-sizing: border-box;
+            border: 5px solid #27ae60;
+        }
+
+        .back h2 {
+            font-family: 'Great Vibes', cursive;
+            color: #c0392b;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .back p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+
+        .back .signature {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <div class="card" onclick="this.classList.toggle('open')">
+            <div class="card-face front">
+                <div class="tree-icon">🎄</div>
+                <h1>Merry<br>Christmas</h1>
+                <div class="click-hint">(Chạm để mở quà)</div>
+            </div>
+
+            <div class="card-face back">
+                <h2>Gửi bạn thân mến,</h2>
+                <p>
+                    Chúc bạn một mùa Giáng Sinh an lành, ấm áp bên những người thân yêu. 
+                    Mong rằng năm mới sẽ mang đến cho bạn thật nhiều niềm vui, sức khỏe và thành công rực rỡ!
+                </p>
+                <div class="signature">
+                    Thân ái,<br>
+                    Vũ
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hàm tạo tuyết rơi
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.textContent = '❄';
+            
+            // Random vị trí bắt đầu (trục ngang)
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            
+            // Random kích thước tuyết
+            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+            
+            // Random thời gian rơi (tốc độ)
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            
+            // Random độ mờ
+            snowflake.style.opacity = Math.random();
+
+            document.body.appendChild(snowflake);
+
+            // Xóa tuyết sau khi rơi xong để nhẹ máy
+            setTimeout(() => {
+                snowflake.remove();
+            }, 5000);
+        }
+
+        // Tạo tuyết liên tục mỗi 100ms
+        setInterval(createSnowflake, 100);
+    </script>
+</body>
+</html>
